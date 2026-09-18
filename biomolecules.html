@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biomolecules — Syllabus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F2F4F1;
+    --paper-raised: #FFFFFF;
+    --ink: #16211F;
+    --ink-soft: #445450;
+    --line: #D7DED9;
+    --teal: #1F6F64;
+    --teal-deep: #123F39;
+    --gold: #C79A3A;
+    --rust: #9C4E2C;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+  }
+  :root[data-theme="dark"]{
+    --paper: #121917; --paper-raised: #182220; --ink: #EAEFEC; --ink-soft: #A9B8B3;
+    --line: #2B3A36; --teal: #4FA598; --teal-deep: #7CC2B5; --gold: #DDB35E; --rust: #D08464;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #121917; --paper-raised: #182220; --ink: #EAEFEC; --ink-soft: #A9B8B3;
+      --line: #2B3A36; --teal: #4FA598; --teal-deep: #7CC2B5; --gold: #DDB35E; --rust: #D08464;
+    }
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--font-body); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{color:var(--teal-deep);}
+  .shell{ display:flex; max-width:1180px; margin:0 auto; align-items:flex-start; }
+  nav.rail{ position:sticky; top:0; height:100vh; width:238px; flex:none; overflow-y:auto; padding:40px 18px 40px 28px; border-right:1px solid var(--line); }
+  .rail-brand{ font-family:var(--font-display); font-size:1.05rem; font-weight:600; margin:0 0 4px 0; }
+  .rail-sub{ font-size:0.78rem; color:var(--ink-soft); margin:0 0 28px 0; }
+  .rail ol{ list-style:none; margin:0; padding:0; counter-reset:unit; }
+  .rail li{counter-increment:unit;}
+  .rail a{ display:flex; gap:10px; align-items:baseline; text-decoration:none; color:var(--ink-soft); font-size:0.86rem; padding:7px 0; border-bottom:1px solid transparent; transition:color .15s ease; }
+  .rail a:hover{color:var(--ink);}
+  .rail a.active{color:var(--teal-deep); font-weight:500;}
+  .rail a::before{ content:counter(unit,decimal-leading-zero); font-family:var(--font-display); font-size:0.78rem; color:var(--gold); flex:none; }
+  main{flex:1; min-width:0; padding:56px 56px 120px 56px;}
+  .hero{ max-width:640px; margin-bottom:64px; }
+  .hero .eyebrow{ color:var(--rust); font-size:0.85rem; margin:0 0 14px 0; }
+  .hero h1{ font-family:var(--font-display); font-size:clamp(2.4rem, 4vw, 3.4rem); font-weight:600; line-height:1.05; margin:0 0 20px 0; }
+  .hero p.lede{ font-size:1.08rem; color:var(--ink-soft); max-width:52ch; margin:0 0 28px 0; }
+  .hero-figure{margin-top:8px;}
+  section.unit{ padding-top:70px; margin-top:-70px; border-top:1px solid var(--line); padding-bottom:56px; }
+  section.unit:first-of-type{border-top:none;}
+  .unit-head{ display:flex; gap:22px; align-items:flex-start; margin-bottom:22px; }
+  .unit-icon{ flex:none; width:64px; height:64px; }
+  .unit-title h2{ font-family:var(--font-display); font-size:1.55rem; font-weight:600; margin:0 0 6px 0; }
+  .unit-title p{ margin:0; color:var(--ink-soft); max-width:58ch; font-size:0.98rem; }
+  .topics{ display:grid; gap:18px; margin-top:26px; }
+  .topic{ display:grid; grid-template-columns:150px 1fr; gap:18px; padding:16px 0; border-bottom:1px solid var(--line); }
+  .topic:last-child{border-bottom:none;}
+  .topic h3{ margin:0; font-size:0.92rem; font-weight:600; color:var(--teal-deep); }
+  .topic p{ margin:0; font-size:0.94rem; color:var(--ink); }
+  .callout{ margin-top:28px; padding:16px 20px; background:var(--paper-raised); border-left:3px solid var(--gold); border-radius:2px; font-size:0.9rem; color:var(--ink-soft); }
+  .callout strong{color:var(--ink);}
+  table.aa-table{ width:100%; border-collapse:collapse; margin-top:28px; font-size:0.86rem; }
+  table.aa-table caption{ text-align:left; font-size:0.85rem; color:var(--ink-soft); margin-bottom:10px; }
+  table.aa-table th{ text-align:left; font-weight:600; color:var(--teal-deep); border-bottom:1px solid var(--line); padding:8px 10px; }
+  table.aa-table td{ padding:7px 10px; border-bottom:1px solid var(--line); }
+  table.aa-table td.mono{ color:var(--ink-soft); }
+  .section-label{ font-size:0.8rem; color:var(--ink-soft); margin:34px 0 6px 0; }
+  table.codon-table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:0.78rem; table-layout:fixed; }
+  table.codon-table caption{ text-align:left; font-size:0.85rem; color:var(--ink-soft); margin-bottom:10px; }
+  table.codon-table th{ font-weight:600; color:var(--teal-deep); padding:6px 4px; border-bottom:1px solid var(--line); text-align:center; }
+  table.codon-table td{ border:1px solid var(--line); padding:6px 4px; vertical-align:top; }
+  table.codon-table td.rowbase{ background:var(--paper-raised); text-align:center; font-family:var(--font-display); font-weight:600; color:var(--gold); width:26px; }
+  .codon-cell{ display:grid; gap:2px; padding:0; }
+  .codon-cell div{ display:flex; justify-content:space-between; gap:6px; }
+  .codon-cell .cd{ font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); }
+  .codon-cell .stop{ color:var(--rust); font-weight:600; }
+  .codon-cell .start{ color:var(--teal-deep); font-weight:600; }
+  .diagram-block{ margin-top:32px; }
+  .diagram-block h3{ font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:0 0 4px 0; }
+  .diagram-block .diagram-caption{ color:var(--ink-soft); font-size:0.88rem; margin:0 0 14px 0; max-width:60ch; }
+  .diagram-legend{ display:flex; gap:18px; flex-wrap:wrap; margin-top:10px; font-size:0.8rem; color:var(--ink-soft); }
+  .diagram-legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend-dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+  .net-summary{ margin-top:14px; padding:12px 16px; background:var(--paper-raised); border:1px solid var(--line); border-radius:2px; font-size:0.86rem; color:var(--ink-soft); }
+  .net-summary strong{color:var(--ink);}
+  .chonps-grid{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  .chonps-chip{ display:flex; align-items:center; gap:8px; padding:7px 12px; background:var(--paper-raised); border:1px solid var(--line); border-radius:20px; font-size:0.85rem; }
+  .chonps-chip b{ color:var(--gold); font-family:var(--font-display); }
+  footer{ padding:40px 56px 60px 56px; color:var(--ink-soft); font-size:0.85rem; max-width:640px; }
+  @media (max-width:900px){
+    nav.rail{display:none;}
+    main{padding:40px 22px 90px 22px;}
+    .topic{grid-template-columns:1fr;}
+    table.aa-table{font-size:0.78rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <nav class="rail" aria-label="Unit navigation">
+    <p class="rail-brand">Biomolecules</p>
+    <p class="rail-sub">Undergraduate · intermediate–advanced</p>
+    <ol id="rail-list">
+      <li><a href="#u1">Water &amp; Chemical Basis</a></li>
+      <li><a href="#u2">Carbohydrates</a></li>
+      <li><a href="#u3">Amino Acids &amp; Protein Structure</a></li>
+      <li><a href="#u4">Protein Function</a></li>
+      <li><a href="#u5">Enzymes</a></li>
+      <li><a href="#u6">Lipids &amp; Membranes</a></li>
+      <li><a href="#u7">Nucleotides &amp; Nucleic Acids</a></li>
+      <li><a href="#u8">Metabolism &amp; Bioenergetics</a></li>
+      <li><a href="#u9">Molecular Techniques</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <p class="eyebrow">Course syllabus, in depth</p>
+      <h1>The molecules that build a cell, unit by unit.</h1>
+      <p class="lede">A nine-unit sequence moving from water and the elements of life through carbohydrates, proteins, enzymes, lipids and nucleic acids, ending at the metabolic pathways that put them to work.</p>
+      <svg class="hero-figure" width="100%" height="120" viewBox="0 0 640 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="60" x2="620" y2="60" stroke="var(--line)" stroke-width="1"/>
+        <g stroke="var(--teal)" stroke-width="1.6">
+          <circle cx="40" cy="60" r="7" fill="var(--paper)"/>
+          <line x1="47" y1="60" x2="105" y2="30"/><circle cx="112" cy="27" r="6" fill="var(--paper)"/>
+          <line x1="47" y1="60" x2="105" y2="90"/><circle cx="112" cy="93" r="6" fill="var(--paper)"/>
+          <line x1="118" y1="27" x2="180" y2="55"/><circle cx="187" cy="58" r="7" fill="var(--paper)"/>
+          <line x1="194" y1="58" x2="260" y2="58"/><circle cx="267" cy="58" r="5" fill="var(--gold)" stroke="var(--gold)"/>
+          <line x1="272" y1="58" x2="330" y2="30"/><circle cx="337" cy="27" r="6" fill="var(--paper)"/>
+          <line x1="272" y1="58" x2="330" y2="86"/><circle cx="337" cy="89" r="6" fill="var(--paper)"/>
+          <line x1="343" y1="89" x2="410" y2="70"/><circle cx="417" cy="68" r="7" fill="var(--paper)"/>
+          <line x1="424" y1="68" x2="480" y2="40"/><circle cx="487" cy="37" r="5" fill="var(--rust)" stroke="var(--rust)"/>
+          <line x1="424" y1="68" x2="480" y2="95"/><circle cx="487" cy="98" r="6" fill="var(--paper)"/>
+          <line x1="493" y1="98" x2="560" y2="75"/><circle cx="567" cy="72" r="6" fill="var(--paper)"/>
+          <line x1="567" y1="66" x2="567" y2="45"/><circle cx="567" cy="38" r="5" fill="var(--gold)" stroke="var(--gold)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- UNIT 1: WATER -->
+    <section class="unit" id="u1">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="24" r="9" stroke="var(--teal)" stroke-width="1.8"/>
+          <circle cx="18" cy="42" r="6" stroke="var(--teal)" stroke-width="1.8"/>
+          <circle cx="46" cy="42" r="6" stroke="var(--teal)" stroke-width="1.8"/>
+          <line x1="26" y1="30" x2="21" y2="37" stroke="var(--teal)" stroke-width="1.8"/>
+          <line x1="38" y1="30" x2="43" y2="37" stroke="var(--teal)" stroke-width="1.8"/>
+          <path d="M32 33 v4" stroke="var(--gold)" stroke-width="1.8" stroke-dasharray="2 2"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Water and the Chemical Basis of Life</h2>
+          <p>Every interaction that follows — folding, binding, catalysis — is a negotiation with water and built from a short list of elements.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Structure &amp; polarity</h3><p>Water's bent geometry and uneven electron distribution create a permanent dipole, the root cause of hydrogen bonding and its unusually high boiling point and heat capacity for its size. This same polarity is why water has a much higher specific heat than most solvents, helping buffer cells against rapid temperature swings.</p></div>
+        <div class="topic"><h3>Water as solvent</h3><p>Ionic and polar solutes dissolve by disrupting water's hydrogen-bond network; nonpolar solutes instead force water into ordered cages, the entropic cost that drives the hydrophobic effect. The 'like dissolves like' rule follows directly from this: charged and polar biomolecules stay in solution, while lipids need transport proteins or vesicles to move through the aqueous cytoplasm.</p></div>
+        <div class="topic"><h3>Hydrophobic effect</h3><p>Nonpolar groups cluster together in water not from mutual attraction but because doing so minimizes the ordered water shell around each one — this drives lipid bilayer formation and protein core packing. It's the single largest thermodynamic driving force in protein folding, favoring the burial of nonpolar side chains in a hydrophobic core away from surrounding water.</p></div>
+        <div class="topic"><h3>Acid–base chemistry</h3><p>pH, pKa, and the Henderson–Hasselbalch equation describe how a weak acid's protonation state shifts with pH — the same logic governs amino acid side chains and nucleotide ionization later on. At physiological pH, most biological molecules exist as a mix of protonated and deprotonated forms rather than one fixed state, which is why pKa values matter more than a single 'charge' label.</p></div>
+        <div class="topic"><h3>Buffers</h3><p>A buffer resists pH change near its pKa by having both proton donor and acceptor present; physiological buffers (bicarbonate, phosphate) keep blood and cytoplasm within a survivable range. A buffer is most effective within about one pH unit of its pKa, which is why cells pair multiple buffer systems to cover a wider working range.</p></div>
+        <div class="topic"><h3>Weak interactions</h3><p>Van der Waals forces, ionic bonds, and dipole–dipole interactions are individually weak but collectively stabilize macromolecular structure — the reason proteins can fold reversibly rather than being welded shut. No single weak bond can hold a structure together alone, but summed across hundreds of contacts they make folded, non-covalent structures both stable and reversible — unlike a covalent bond, which would need to be broken chemically.</p></div>
+        <div class="topic"><h3>CHONPS: elements of life</h3><p>Nearly every biomolecule is built from six elements: carbon (the backbone-forming atom), hydrogen, oxygen, nitrogen, phosphorus (nucleotide and phospholipid backbones), and sulfur (disulfide bonds, some cofactors). Their bonding versatility — especially carbon's four bonds — is what makes the huge diversity of organic structures possible. Trace elements (iron, zinc, magnesium, calcium, among others) round out the list as cofactors and structural ions, even though they make up a much smaller fraction of biomass.</p></div>
+      </div>
+      <div class="chonps-grid">
+        <div class="chonps-chip"><b>C</b> carbon</div>
+        <div class="chonps-chip"><b>H</b> hydrogen</div>
+        <div class="chonps-chip"><b>O</b> oxygen</div>
+        <div class="chonps-chip"><b>N</b> nitrogen</div>
+        <div class="chonps-chip"><b>P</b> phosphorus</div>
+        <div class="chonps-chip"><b>S</b> sulfur</div>
+      </div>
+      <div class="callout"><strong>Study focus:</strong> practice pKa/Henderson-Hasselbalch calculations until they're automatic — they resurface with amino acids and enzyme active sites.</div>
+    </section>
+
+    <!-- UNIT 2: CARBOHYDRATES -->
+    <section class="unit" id="u2">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <polygon points="32,14 48,23 48,41 32,50 16,41 16,23" stroke="var(--teal)" stroke-width="1.8" fill="none"/>
+          <circle cx="32" cy="32" r="2.4" fill="var(--gold)"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Carbohydrates</h2>
+          <p>Beyond fuel storage: sugars as structural material, and as molecular identification tags on the cell surface.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Monosaccharides</h3><p>Classified by carbon number and functional group (aldose vs. ketose), with stereochemistry captured in Fischer projections and ring form in Haworth projections. Glucose specifically exists mostly in its cyclic (ring) form in solution rather than the open-chain form, an equilibrium relevant to how it reacts in glycosylation reactions.</p></div>
+        <div class="topic"><h3>Disaccharides</h3><p>Two monosaccharides joined by a glycosidic bond — the specific linkage (e.g., α-1,4 vs. β-1,4) determines digestibility and physical properties. Lactose intolerance is a direct, clinically relevant example of what happens when the enzyme that hydrolyzes a specific glycosidic bond (lactase, for the β-1,4 bond in lactose) is deficient.</p></div>
+        <div class="topic"><h3>Polysaccharides</h3><p>Starch and glycogen store glucose using α-linkages that pack loosely for rapid mobilization; cellulose and chitin use β-linkages that pack rigidly for structural strength. Because α-1,4 and α-1,6 linkages create a coiled, branched structure, glycogen and starch stay soluble and enzyme-accessible, while cellulose's straight β-linked chains pack into rigid, insoluble fibers.</p></div>
+        <div class="topic"><h3>Glycoproteins &amp; glycolipids</h3><p>Carbohydrate chains attached to proteins or lipids extend from the cell surface, mediating recognition events from blood typing to pathogen attachment. N-linked glycosylation (on asparagine) and O-linked glycosylation (on serine/threonine) are the two major routes cells use to attach these carbohydrate chains, each processed differently in the ER and Golgi.</p></div>
+        <div class="topic"><h3>Cell signaling role</h3><p>The glycocalyx's sugar patterns act as an identity code read by lectins and immune receptors — background that resurfaces anywhere immune recognition is discussed. This is the molecular basis of the ABO blood group system, where a single added sugar residue on a shared glycolipid backbone determines blood type.</p></div>
+      </div>
+    </section>
+
+    <!-- UNIT 3: AMINO ACIDS -->
+    <section class="unit" id="u3">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <path d="M12 44 Q 22 20, 32 32 T 52 20" stroke="var(--teal)" stroke-width="2" fill="none"/>
+          <circle cx="12" cy="44" r="3" fill="var(--gold)"/>
+          <circle cx="32" cy="32" r="3" fill="var(--gold)"/>
+          <circle cx="52" cy="20" r="3" fill="var(--gold)"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Amino Acids, Peptides, and Protein Structure</h2>
+          <p>From twenty simple building blocks, encoded by a shared genetic language, to structures that fold into specific, functional shapes.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Amino acid classification</h3><p>Grouped by side-chain chemistry — nonpolar, polar uncharged, acidic, basic, aromatic — this classification predicts where a residue sits in a folded protein and what it can chemically do there. The R-group is the only part that varies between the 20 amino acids, so classification by side-chain chemistry is really a shortcut for predicting an amino acid's role in folding, catalysis, or binding.</p></div>
+        <div class="topic"><h3>Ionization &amp; pI</h3><p>Each amino acid has a titration curve reflecting its ionizable groups; the isoelectric point is where net charge is zero, a property exploited in isoelectric focusing and protein purification. For amino acids with an ionizable side chain (like aspartate or lysine), the titration curve has three inflection points instead of two, reflecting the extra pKa.</p></div>
+        <div class="topic"><h3>Peptide bond</h3><p>Formed by condensation between carboxyl and amino groups, the peptide bond has partial double-bond character that keeps it planar and rigid, constraining the backbone's possible conformations. Because rotation is restricted around the peptide bond itself, the only backbone angles free to rotate are phi (φ) and psi (ψ), which is exactly what the Ramachandran plot maps.</p></div>
+        <div class="topic"><h3>Genetic code</h3><p>Each amino acid is specified by one or more three-base codons read from mRNA; with 64 possible codons for 20 amino acids, the code is degenerate (redundant), nearly universal across life, and includes a start codon (AUG, methionine) and three stop codons that end translation. Degeneracy is concentrated in the third codon position (the 'wobble' position), which is why a single tRNA can often recognize more than one codon for the same amino acid.</p></div>
+        <div class="topic"><h3>Primary structure</h3><p>The linear amino acid sequence, determined historically by Edman degradation and now routinely by mass spectrometry, dictates everything that follows in folding. A single amino acid substitution in the primary sequence can be enough to disrupt folding entirely — sickle cell hemoglobin is the classic example of one such point mutation.</p></div>
+        <div class="topic"><h3>Secondary structure</h3><p>α-helices and β-sheets arise from backbone hydrogen bonding patterns; the Ramachandran plot maps which backbone dihedral angles are sterically allowed. β-turns and loops connect these regular elements and are often where a protein's functional flexibility lives, since they're less structurally constrained than helices or sheets.</p></div>
+        <div class="topic"><h3>Tertiary &amp; quaternary structure</h3><p>Tertiary structure is the full 3D fold of one chain, stabilized by hydrophobic collapse, disulfide bonds, and packing; quaternary structure describes how multiple folded chains assemble, often cooperatively. Not all proteins have quaternary structure — it only applies to proteins built from more than one polypeptide chain, like hemoglobin's four subunits versus myoglobin's single chain.</p></div>
+        <div class="topic"><h3>Denaturation</h3><p>Heat, pH extremes, or chaotropic agents disrupt the weak forces holding tertiary structure, unfolding the protein — sometimes reversibly, which is how in vitro refolding experiments work. Denaturation changes shape, not covalent sequence, which is why some enzymes (like Taq polymerase, used in PCR) are prized specifically for resisting it at high temperatures.</p></div>
+        <div class="topic"><h3>Structural techniques</h3><p>SDS-PAGE separates by size, chromatography by charge/affinity/size, and X-ray crystallography or NMR resolve atomic-level 3D structure. Cryo-electron microscopy has become a fourth major technique alongside these, particularly useful for large complexes that resist crystallization.</p></div>
+      </div>
+
+      <table class="aa-table">
+        <caption>The 20 standard amino acids, grouped by whether the human body can synthesize them.</caption>
+        <thead>
+          <tr><th>Essential (must come from diet)</th><th>Non-essential (body can synthesize)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Histidine (His, H)</td><td>Alanine (Ala, A)</td></tr>
+          <tr><td>Isoleucine (Ile, I)</td><td>Arginine (Arg, R) — conditionally essential</td></tr>
+          <tr><td>Leucine (Leu, L)</td><td>Asparagine (Asn, N)</td></tr>
+          <tr><td>Lysine (Lys, K)</td><td>Aspartate (Asp, D)</td></tr>
+          <tr><td>Methionine (Met, M)</td><td>Cysteine (Cys, C) — conditionally essential</td></tr>
+          <tr><td>Phenylalanine (Phe, F)</td><td>Glutamate (Glu, E)</td></tr>
+          <tr><td>Threonine (Thr, T)</td><td>Glutamine (Gln, Q) — conditionally essential</td></tr>
+          <tr><td>Tryptophan (Trp, W)</td><td>Glycine (Gly, G)</td></tr>
+          <tr><td>Valine (Val, V)</td><td>Proline (Pro, P)</td></tr>
+          <tr><td class="mono">—</td><td>Serine (Ser, S)</td></tr>
+          <tr><td class="mono">—</td><td>Tyrosine (Tyr, Y) — conditionally essential</td></tr>
+        </tbody>
+      </table>
+
+      <p class="section-label">The standard genetic code — mRNA codons, read 5'→3', grouped by first base (rows) and second base (columns). Each cell's four lines are the third-base variants (U, C, A, G).</p>
+      <table class="codon-table">
+        <caption>64 codons specify 20 amino acids plus start (AUG) and stop (UAA, UAG, UGA) signals.</caption>
+        <thead>
+          <tr><th></th><th>U</th><th>C</th><th>A</th><th>G</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rowbase" rowspan="1">U</td>
+            <td><div class="codon-cell">
+              <div><span class="cd">UUU</span><span>Phe</span></div>
+              <div><span class="cd">UUC</span><span>Phe</span></div>
+              <div><span class="cd">UUA</span><span>Leu</span></div>
+              <div><span class="cd">UUG</span><span>Leu</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">UCU</span><span>Ser</span></div>
+              <div><span class="cd">UCC</span><span>Ser</span></div>
+              <div><span class="cd">UCA</span><span>Ser</span></div>
+              <div><span class="cd">UCG</span><span>Ser</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">UAU</span><span>Tyr</span></div>
+              <div><span class="cd">UAC</span><span>Tyr</span></div>
+              <div><span class="cd">UAA</span><span class="stop">Stop</span></div>
+              <div><span class="cd">UAG</span><span class="stop">Stop</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">UGU</span><span>Cys</span></div>
+              <div><span class="cd">UGC</span><span>Cys</span></div>
+              <div><span class="cd">UGA</span><span class="stop">Stop</span></div>
+              <div><span class="cd">UGG</span><span>Trp</span></div>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="rowbase">C</td>
+            <td><div class="codon-cell">
+              <div><span class="cd">CUU</span><span>Leu</span></div>
+              <div><span class="cd">CUC</span><span>Leu</span></div>
+              <div><span class="cd">CUA</span><span>Leu</span></div>
+              <div><span class="cd">CUG</span><span>Leu</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">CCU</span><span>Pro</span></div>
+              <div><span class="cd">CCC</span><span>Pro</span></div>
+              <div><span class="cd">CCA</span><span>Pro</span></div>
+              <div><span class="cd">CCG</span><span>Pro</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">CAU</span><span>His</span></div>
+              <div><span class="cd">CAC</span><span>His</span></div>
+              <div><span class="cd">CAA</span><span>Gln</span></div>
+              <div><span class="cd">CAG</span><span>Gln</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">CGU</span><span>Arg</span></div>
+              <div><span class="cd">CGC</span><span>Arg</span></div>
+              <div><span class="cd">CGA</span><span>Arg</span></div>
+              <div><span class="cd">CGG</span><span>Arg</span></div>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="rowbase">A</td>
+            <td><div class="codon-cell">
+              <div><span class="cd">AUU</span><span>Ile</span></div>
+              <div><span class="cd">AUC</span><span>Ile</span></div>
+              <div><span class="cd">AUA</span><span>Ile</span></div>
+              <div><span class="cd">AUG</span><span class="start">Met (start)</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">ACU</span><span>Thr</span></div>
+              <div><span class="cd">ACC</span><span>Thr</span></div>
+              <div><span class="cd">ACA</span><span>Thr</span></div>
+              <div><span class="cd">ACG</span><span>Thr</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">AAU</span><span>Asn</span></div>
+              <div><span class="cd">AAC</span><span>Asn</span></div>
+              <div><span class="cd">AAA</span><span>Lys</span></div>
+              <div><span class="cd">AAG</span><span>Lys</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">AGU</span><span>Ser</span></div>
+              <div><span class="cd">AGC</span><span>Ser</span></div>
+              <div><span class="cd">AGA</span><span>Arg</span></div>
+              <div><span class="cd">AGG</span><span>Arg</span></div>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="rowbase">G</td>
+            <td><div class="codon-cell">
+              <div><span class="cd">GUU</span><span>Val</span></div>
+              <div><span class="cd">GUC</span><span>Val</span></div>
+              <div><span class="cd">GUA</span><span>Val</span></div>
+              <div><span class="cd">GUG</span><span>Val</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">GCU</span><span>Ala</span></div>
+              <div><span class="cd">GCC</span><span>Ala</span></div>
+              <div><span class="cd">GCA</span><span>Ala</span></div>
+              <div><span class="cd">GCG</span><span>Ala</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">GAU</span><span>Asp</span></div>
+              <div><span class="cd">GAC</span><span>Asp</span></div>
+              <div><span class="cd">GAA</span><span>Glu</span></div>
+              <div><span class="cd">GAG</span><span>Glu</span></div>
+            </div></td>
+            <td><div class="codon-cell">
+              <div><span class="cd">GGU</span><span>Gly</span></div>
+              <div><span class="cd">GGC</span><span>Gly</span></div>
+              <div><span class="cd">GGA</span><span>Gly</span></div>
+              <div><span class="cd">GGG</span><span>Gly</span></div>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- UNIT 4: PROTEIN FUNCTION -->
+    <section class="unit" id="u4">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <path d="M16 46 C 16 30, 26 22, 32 30 C 38 22, 48 30, 48 46 C 40 40, 24 40, 16 46 Z" stroke="var(--teal)" stroke-width="1.8"/>
+          <circle cx="32" cy="30" r="3" fill="var(--rust)"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Protein Function</h2>
+          <p>Structure earns its keep here: how shape becomes oxygen transport, immune recognition, and movement.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Myoglobin &amp; hemoglobin</h3><p>Myoglobin binds oxygen with simple hyperbolic kinetics; hemoglobin's four subunits bind cooperatively, producing the sigmoidal curve that makes efficient oxygen loading and unloading possible. This structural difference is functionally important: myoglobin's simple curve suits its job of storing oxygen in muscle, while hemoglobin's cooperative curve suits transporting oxygen efficiently between lungs and tissue.</p></div>
+        <div class="topic"><h3>Allosteric regulation</h3><p>Binding at one site changes affinity at another distant site — hemoglobin's T and R states are the classic teaching model for this concept. Allosteric effectors can be activators or inhibitors, and the same molecule sometimes does both depending on which site it binds.</p></div>
+        <div class="topic"><h3>Bohr effect &amp; 2,3-BPG</h3><p>Lower pH and higher CO2 in respiring tissue shift hemoglobin toward oxygen release; 2,3-BPG stabilizes the low-affinity state, tuning oxygen delivery to metabolic demand. This is a feedback loop with real physiological stakes: actively respiring tissue produces more CO2 and lactic acid, which locally promotes exactly the oxygen release it needs.</p></div>
+        <div class="topic"><h3>Antibody structure–function</h3><p>The Y-shaped immunoglobulin fold pairs a constant region for effector function with hypervariable loops that generate near-limitless antigen specificity. The constant region also determines antibody class (IgG, IgM, IgA, etc.), each suited to a different stage or location of the immune response.</p></div>
+        <div class="topic"><h3>Motor proteins</h3><p>Actin and myosin convert ATP hydrolysis into directional force through a cyclical conformational change — the same chemomechanical logic reappears in kinesin and dynein. ATP hydrolysis doesn't just supply energy here — its cycle of binding, hydrolysis, and release drives the actual conformational 'power stroke' that produces movement.</p></div>
+      </div>
+    </section>
+
+    <!-- UNIT 5: ENZYMES -->
+    <section class="unit" id="u5">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <path d="M10 46 Q 32 46, 32 24 Q 32 46, 54 46" stroke="var(--teal)" stroke-width="1.8" fill="none"/>
+          <line x1="10" y1="46" x2="54" y2="46" stroke="var(--line)" stroke-width="1.4"/>
+          <circle cx="32" cy="24" r="3" fill="var(--gold)"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Enzymes</h2>
+          <p>Biology's catalysts: how they accelerate reactions by a factor of millions, and how cells keep that power in check.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Catalytic mechanisms</h3><p>Enzymes speed reactions by stabilizing the transition state — the highest-energy point along the reaction path — rather than by changing the reaction's overall thermodynamics. Common catalytic strategies include acid-base catalysis, covalent catalysis, and metal ion catalysis, often combined within a single active site.</p></div>
+        <div class="topic"><h3>Michaelis–Menten kinetics</h3><p>The Michaelis-Menten equation models the relationship between substrate concentration and reaction velocity, visualized linearly through the Lineweaver–Burk double-reciprocal plot. The model assumes steady-state conditions, where the enzyme-substrate complex forms and breaks down at roughly equal rates — an assumption worth remembering when interpreting unusual kinetic data.</p></div>
+        <div class="topic"><h3>Km, Vmax, kcat</h3><p>Km approximates substrate affinity (lower = tighter binding), Vmax is the maximum rate at saturating substrate, and kcat/Km together describe catalytic efficiency. Comparing kcat/Km across different substrates for the same enzyme is how biochemists quantify substrate specificity.</p></div>
+        <div class="topic"><h3>Inhibition types</h3><p>Competitive inhibitors raise apparent Km, noncompetitive inhibitors lower Vmax without affecting Km, and uncompetitive/mixed inhibitors do some combination — each has a distinct Lineweaver-Burk signature. Irreversible inhibitors (which covalently modify the enzyme) are a separate category from these four reversible types and can't be overcome by adding more substrate.</p></div>
+        <div class="topic"><h3>Allosteric enzymes</h3><p>These deviate from Michaelis-Menten kinetics, showing sigmoidal curves due to cooperative binding across multiple subunits, and are frequent targets of feedback regulation. Because of their sigmoidal response, allosteric enzymes act as better metabolic 'switches' than simple Michaelis-Menten enzymes, which respond more gradually to changes in substrate concentration.</p></div>
+        <div class="topic"><h3>Cofactors &amp; coenzymes</h3><p>Many enzymes require a non-protein helper — a metal ion or an organic coenzyme, often vitamin-derived — to complete their catalytic chemistry. A coenzyme that stays permanently attached to the enzyme is called a prosthetic group, distinguishing it from coenzymes that bind and release like a co-substrate.</p></div>
+        <div class="topic"><h3>Regulatory mechanisms</h3><p>Cells tune enzyme activity through covalent modification (phosphorylation), zymogen activation (proteolytic cleavage), and feedback inhibition by pathway end-products. These mechanisms operate on different timescales: covalent modification acts in seconds to minutes, while changes in enzyme amount (via gene expression) act over hours.</p></div>
+      </div>
+      <div class="callout"><strong>Study focus:</strong> be able to derive, not just recognize, the Lineweaver-Burk transformation — exam questions often ask you to identify inhibition type from a plot.</div>
+    </section>
+
+    <!-- UNIT 6: LIPIDS -->
+    <section class="unit" id="u6">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <g stroke="var(--teal)" stroke-width="1.8">
+            <line x1="14" y1="26" x2="14" y2="14"/><circle cx="14" cy="30" r="3.4"/>
+            <line x1="24" y1="26" x2="24" y2="14"/><circle cx="24" cy="30" r="3.4"/>
+            <line x1="34" y1="26" x2="34" y2="14"/><circle cx="34" cy="30" r="3.4"/>
+            <line x1="14" y1="38" x2="14" y2="50"/><circle cx="14" cy="34" r="3.4"/>
+            <line x1="24" y1="38" x2="24" y2="50"/><circle cx="24" cy="34" r="3.4"/>
+            <line x1="34" y1="38" x2="34" y2="50"/><circle cx="34" cy="34" r="3.4"/>
+          </g>
+        </svg>
+        <div class="unit-title">
+          <h2>Lipids and Membranes</h2>
+          <p>The cell's boundary is not a wall but a fluid, selectively permeable film — built from molecules that are part water-loving, part water-fearing.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Fatty acid structure</h3><p>Chain length and degree of unsaturation determine melting point and membrane fluidity; nomenclature (e.g., 18:1 Δ9) encodes both. Cis double bonds put a kink in the chain that prevents tight packing, which is why unsaturated fats tend to be liquid at room temperature while saturated fats are solid.</p></div>
+        <div class="topic"><h3>Lipid classes</h3><p>Triacylglycerols store energy densely; phospholipids and sphingolipids build bilayers; sterols like cholesterol modulate membrane rigidity and fluidity. Sphingolipids in particular are enriched in lipid rafts, specialized membrane microdomains implicated in signaling and pathogen entry.</p></div>
+        <div class="topic"><h3>Fluid mosaic model</h3><p>The membrane is a two-dimensional fluid of lipids and proteins that diffuse laterally, not a static structure — a model with direct implications for viral entry and receptor clustering. Membrane fluidity itself is tunable — cholesterol content, and the ratio of saturated to unsaturated fatty acids, both shift how rigid or fluid a given membrane is.</p></div>
+        <div class="topic"><h3>Membrane transport</h3><p>Passive diffusion needs no energy input, facilitated diffusion uses channel or carrier proteins along a gradient, and active transport spends ATP to move solutes against their gradient. Osmosis is a special case of passive transport, involving water movement across a membrane in response to a solute concentration gradient rather than the solute itself moving.</p></div>
+        <div class="topic"><h3>Membrane proteins</h3><p>Integral proteins span the bilayer (often as α-helices), while peripheral proteins associate loosely with the membrane surface — their positioning defines a huge share of cell signaling capacity. Many integral membrane proteins are also glycosylated on their extracellular-facing loops, linking this topic back to the carbohydrate unit's discussion of cell-surface recognition.</p></div>
+      </div>
+    </section>
+
+    <!-- UNIT 7: NUCLEOTIDES -->
+    <section class="unit" id="u7">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <path d="M20 14 C 12 24, 12 40, 20 50" stroke="var(--teal)" stroke-width="1.8" fill="none"/>
+          <path d="M44 14 C 52 24, 52 40, 44 50" stroke="var(--teal)" stroke-width="1.8" fill="none"/>
+          <line x1="22" y1="20" x2="42" y2="16" stroke="var(--gold)" stroke-width="1.6"/>
+          <line x1="21" y1="32" x2="43" y2="32" stroke="var(--gold)" stroke-width="1.6"/>
+          <line x1="22" y1="44" x2="42" y2="48" stroke="var(--gold)" stroke-width="1.6"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Nucleotides and Nucleic Acids</h2>
+          <p>The information-carrying molecules — structure here is inseparable from the genetics and molecular biology that follow this course.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Nucleoside vs. nucleotide</h3><p>A nucleoside is only a nitrogenous base joined to a five-carbon sugar (ribose or deoxyribose); a nucleotide is a nucleoside plus one or more phosphate groups attached to the sugar's 5' carbon — the phosphate is what makes it polymerizable into DNA or RNA. Nucleoside triphosphates (like ATP or GTP) aren't just building blocks for nucleic acids — their extra phosphates make them the cell's main energy currency and second-messenger molecules.</p></div>
+        <div class="topic"><h3>Purines &amp; pyrimidines</h3><p>Adenine and guanine are purines, built on a fused double-ring structure; cytosine, thymine, and uracil are pyrimidines, with a single six-membered ring. A purine always pairs with a pyrimidine in the double helix, which keeps the helix's width constant. Purines are synthesized starting from an existing ribose-phosphate scaffold, while pyrimidines are synthesized as a free base first and attached to ribose-phosphate afterward — a biosynthetic distinction that also matters in Unit 8's metabolism.</p></div>
+        <div class="topic"><h3>DNA structure</h3><p>Watson-Crick base pairing (A-T, G-C) and antiparallel strand orientation produce the double helix; supercoiling manages the packaging problem of fitting long DNA into small spaces. The major and minor grooves created by the helix's twist are where most DNA-binding proteins (transcription factors, restriction enzymes) actually read the sequence without unwinding the helix.</p></div>
+        <div class="topic"><h3>RNA structure &amp; types</h3><p>Single-stranded and chemically distinct from DNA (ribose, uracil in place of thymine), RNA takes on diverse roles — mRNA as message, tRNA as adaptor, rRNA as ribozyme, plus a growing catalog of regulatory ncRNAs. Unlike DNA, RNA readily forms complex secondary structures (hairpins, stem-loops) from intramolecular base pairing, which is essential to tRNA's cloverleaf shape and to ribozyme catalysis.</p></div>
+        <div class="topic"><h3>Denaturation &amp; Tm</h3><p>Heating separates the two DNA strands at a sequence-dependent melting temperature, higher for GC-rich regions due to their triple hydrogen bond — the basis of PCR and hybridization assays. This same principle underlies the annealing step of PCR, where primers re-bind to single-stranded template DNA as the reaction is cooled below its Tm.</p></div>
+        <div class="topic"><h3>Chromatin basics</h3><p>DNA wraps around histone octamers to form nucleosomes, the first level of compaction that also serves as a platform for epigenetic regulation. Histone tails are frequently modified (acetylation, methylation), and these modifications loosen or tighten chromatin packing — a major mechanism of gene expression control beyond the DNA sequence itself.</p></div>
+      </div>
+    </section>
+
+    <!-- UNIT 8: METABOLISM -->
+    <section class="unit" id="u8">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <polygon points="34,12 22,34 30,34 24,52 44,28 35,28" fill="var(--gold)" stroke="var(--gold)" stroke-width="1"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Metabolism &amp; Bioenergetics</h2>
+          <p>The unit that connects biomolecule structure to what a cell actually does with them: extract, store, and mobilize energy from glucose.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Thermodynamics</h3><p>ΔG determines whether a reaction proceeds spontaneously; ΔG°' is the standard free energy change under biochemical standard conditions (pH 7), the reference point used throughout metabolism. A reaction with a positive ΔG°' isn't impossible inside a cell — it can still run forward if it's coupled to a second, more favorable reaction, which is exactly how ATP hydrolysis drives so much of metabolism.</p></div>
+        <div class="topic"><h3>ATP as currency</h3><p>ATP hydrolysis releases free energy that cells couple to otherwise unfavorable reactions — a recurring strategy rather than a single mechanism. ATP's energy is stored in the electrostatic repulsion between its closely spaced negative phosphate groups, released when a phosphate bond is hydrolyzed.</p></div>
+        <div class="topic"><h3>Redox chemistry</h3><p>Oxidation-reduction reactions transfer electrons between molecules; NAD+/NADH and FAD/FADH2 shuttle those electrons to the electron transport chain, where they ultimately power ATP synthase via oxidative phosphorylation. NADH is mainly used to feed the electron transport chain for ATP production, while NADPH — a related but distinct carrier — is used mostly in biosynthetic (anabolic) reactions instead.</p></div>
+        <div class="topic"><h3>Glycolysis</h3><p>Ten enzymatic steps in the cytosol split one glucose into two pyruvate molecules. The first three steps (an <em>investment phase</em>) spend 2 ATP to prime the molecule; the remaining steps (a <em>payoff phase</em>) run twice per glucose (since the six-carbon sugar splits into two three-carbon units) and generate 4 ATP and 2 NADH. Net: 2 ATP, 2 NADH, 2 pyruvate — and it proceeds with or without oxygen. Under anaerobic conditions, pyruvate is instead reduced to lactate (or ethanol, in yeast) purely to regenerate the NAD+ that glycolysis needs to keep running.</p></div>
+        <div class="topic"><h3>Pyruvate dehydrogenase (bridge step)</h3><p>Before entering the Krebs cycle, each pyruvate is oxidatively decarboxylated in the mitochondrial matrix to acetyl-CoA, releasing one CO2 and generating one NADH per pyruvate — this irreversible step commits carbon to aerobic metabolism. This is technically not part of either glycolysis or the Krebs cycle, but the essential link between them, and it's a common target of metabolic regulation and toxins (like arsenic).</p></div>
+        <div class="topic"><h3>Citric acid (Krebs) cycle</h3><p>Acetyl-CoA condenses with oxaloacetate to form citrate, then passes through eight steps that fully oxidize the two acetyl carbons to CO2 while loading electrons onto NADH and FADH2. It regenerates oxaloacetate at the end, making it a true cycle, and also intersects amino acid and fatty acid catabolism through shared intermediates. Despite the name 'cycle', it doesn't spin freely — several steps are strongly regulated by ATP, NADH, and calcium levels to match electron output to the cell's actual energy demand.</p></div>
+        <div class="topic"><h3>Gluconeogenesis</h3><p>The reverse logic of glycolysis, synthesizing glucose from non-carbohydrate precursors (lactate, glycerol, certain amino acids) during fasting. It reuses seven of glycolysis's reversible steps but bypasses the three irreversible ones (hexokinase, PFK-1, pyruvate kinase) with dedicated enzymes — pyruvate carboxylase and PEP carboxykinase, fructose-1,6-bisphosphatase, and glucose-6-phosphatase — so the cell never runs both directions on the same substrate at once. This pathway happens mainly in the liver (and to a lesser extent the kidney), which is precisely why liver function matters so much for maintaining blood glucose during a fast.</p></div>
+        <div class="topic"><h3>Glycogenesis</h3><p>Glucose-6-P is converted to glucose-1-P, then activated as UDP-glucose before glycogen synthase adds it to a growing glycogen chain, with branching enzyme creating the branch points that make glycogen rapidly mobilizable. Insulin promotes this pathway after a meal; its counterpart, glycogenolysis, reverses it under glucagon/epinephrine signaling. Liver glycogen mainly buffers blood glucose for the whole body, while muscle glycogen is used locally to fuel that muscle's own contraction — the same molecule serving two different physiological roles.</p></div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Glycolysis, step by step</h3>
+        <p class="diagram-caption">One glucose (6C) becomes two pyruvate (3C) through ten numbered reactions, each catalyzed by its own enzyme. Steps 6–10 run twice per glucose, since the six-carbon intermediate splits into two three-carbon halves at step 4.</p>
+        <svg viewBox="0 0 940 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="16" font-family="IBM Plex Sans" font-size="11" fill="var(--rust)">Investment phase</text>
+          <text x="360" y="16" font-family="IBM Plex Sans" font-size="11" fill="var(--teal-deep)">Cleavage</text>
+          <text x="520" y="16" font-family="IBM Plex Sans" font-size="11" fill="var(--gold)">Payoff phase — reactions 6–10 occur twice</text>
+          <line x1="0" y1="26" x2="940" y2="26" stroke="var(--line)" stroke-width="1"/>
+          <line x1="35" y1="150" x2="905" y2="150" stroke="var(--line)" stroke-width="1"/>
+          <defs>
+            <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+          <g font-family="IBM Plex Sans" font-size="10.5" fill="var(--ink)" text-anchor="middle">
+            <circle cx="55" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="55" y="177">Glucose</text>
+            <circle cx="150" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="150" y="177">G6P</text>
+            <circle cx="245" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="245" y="177">F6P</text>
+            <circle cx="340" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="340" y="177">F1,6BP</text>
+            <circle cx="435" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="435" y="177">DHAP+G3P</text>
+            <circle cx="520" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="520" y="177">2× G3P</text>
+            <circle cx="610" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="610" y="177">1,3-BPG</text>
+            <circle cx="695" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="695" y="177">3-PG</text>
+            <circle cx="775" cy="150" r="17" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.6"/><text x="775" y="177">2-PG → PEP</text>
+            <circle cx="875" cy="150" r="18" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="875" y="177">Pyruvate</text>
+          </g>
+          <g stroke="var(--ink-soft)" stroke-width="1.3" marker-end="url(#arrowG)">
+            <line x1="72" y1="150" x2="133" y2="150"/>
+            <line x1="167" y1="150" x2="228" y2="150"/>
+            <line x1="262" y1="150" x2="323" y2="150"/>
+            <line x1="357" y1="150" x2="418" y2="150"/>
+            <line x1="452" y1="150" x2="503" y2="150"/>
+            <line x1="537" y1="150" x2="593" y2="150"/>
+            <line x1="627" y1="150" x2="678" y2="150"/>
+            <line x1="712" y1="150" x2="757" y2="150"/>
+            <line x1="793" y1="150" x2="856" y2="150"/>
+          </g>
+          <g font-family="IBM Plex Sans" font-size="9" fill="var(--ink-soft)" text-anchor="middle">
+            <text x="102" y="120">1. Hexokinase</text>
+            <text x="197" y="120">2. Phospho­glucose isomerase</text>
+            <text x="292" y="120">3. PFK-1</text>
+            <text x="387" y="120">4. Aldolase</text>
+            <text x="477" y="120">5. Triose-P isomerase</text>
+            <text x="565" y="120">6. G3P dehydrogenase</text>
+            <text x="652" y="120">7. Phospho­glycerate kinase</text>
+            <text x="734" y="120">8–9. Mutase / Enolase</text>
+            <text x="824" y="120">10. Pyruvate kinase</text>
+          </g>
+          <g font-family="IBM Plex Sans" font-size="10" font-weight="600">
+            <text x="102" y="138" text-anchor="middle" fill="var(--rust)">−1 ATP</text>
+            <text x="292" y="138" text-anchor="middle" fill="var(--rust)">−1 ATP</text>
+            <text x="565" y="200" text-anchor="middle" fill="var(--teal-deep)">+2 NADH</text>
+            <text x="652" y="200" text-anchor="middle" fill="var(--gold)">+2 ATP</text>
+            <text x="824" y="200" text-anchor="middle" fill="var(--gold)">+2 ATP</text>
+          </g>
+        </svg>
+        <div class="net-summary"><strong>Net per glucose:</strong> 2 ATP, 2 NADH, 2 pyruvate (4 ATP produced in the payoff phase − 2 ATP invested upfront).</div>
+        <div class="diagram-legend">
+          <span><span class="legend-dot" style="background:var(--gold)"></span>ATP/GTP produced</span>
+          <span><span class="legend-dot" style="background:var(--teal)"></span>NADH/FADH2 produced</span>
+          <span><span class="legend-dot" style="background:var(--rust)"></span>ATP invested / CO2 released</span>
+        </div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Citric acid (Krebs) cycle</h3>
+        <p class="diagram-caption">Acetyl-CoA enters at the top and combines with oxaloacetate; each full turn regenerates oxaloacetate and fully oxidizes one two-carbon acetyl group to two CO2.</p>
+        <svg viewBox="0 0 460 470" width="100%" height="auto" style="max-width:460px; display:block; margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+          <text x="230" y="18" text-anchor="middle" font-family="IBM Plex Sans" font-size="11" fill="var(--ink-soft)">Acetyl-CoA in (from pyruvate dehydrogenase)</text>
+          <line x1="230" y1="24" x2="230" y2="58" stroke="var(--ink-soft)" stroke-width="1.3" marker-end="url(#arrowK)"/>
+          <defs>
+            <marker id="arrowK" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L8,4 L0,8 z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+          <g stroke="var(--teal)" stroke-width="1.6" fill="none" marker-end="url(#arrowK)">
+            <path d="M 246 72 L 326 108"/>
+            <path d="M 350 130 L 372 200"/>
+            <path d="M 372 234 L 350 300"/>
+            <path d="M 326 324 L 236 366"/>
+            <path d="M 208 366 L 118 324"/>
+            <path d="M 94 300 L 72 234"/>
+            <path d="M 72 200 L 94 130"/>
+            <path d="M 118 108 L 210 72"/>
+          </g>
+          <g font-family="IBM Plex Sans" font-size="10.5" fill="var(--ink)" text-anchor="middle">
+            <circle cx="230" cy="62" r="22" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="230" y="66">Citrate</text>
+            <circle cx="340" cy="118" r="22" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="340" y="122">Isocitrate</text>
+            <circle cx="382" cy="215" r="26" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="382" y="212">α-KG</text>
+            <circle cx="340" cy="312" r="24" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="340" y="308">Succinyl-</text><text x="340" y="320">CoA</text>
+            <circle cx="230" cy="368" r="22" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="230" y="372">Succinate</text>
+            <circle cx="120" cy="312" r="22" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="120" y="316">Fumarate</text>
+            <circle cx="78" cy="215" r="22" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="78" y="219">Malate</text>
+            <circle cx="120" cy="118" r="24" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="120" y="114">Oxalo-</text><text x="120" y="126">acetate</text>
+          </g>
+          <g font-family="IBM Plex Sans" font-size="9">
+            <text x="300" y="88" fill="var(--ink-soft)" text-anchor="middle">1. Citrate synthase</text>
+            <text x="376" y="165" fill="var(--ink-soft)" text-anchor="middle">2. Aconitase</text>
+            <text x="416" y="270" fill="var(--rust)" text-anchor="middle">3. Isocitrate DH</text>
+            <text x="416" y="282" fill="var(--rust)" text-anchor="middle">−CO2, +NADH</text>
+            <text x="378" y="345" fill="var(--rust)" text-anchor="middle">4. α-KG DH</text>
+            <text x="378" y="357" fill="var(--rust)" text-anchor="middle">−CO2, +NADH</text>
+            <text x="278" y="392" fill="var(--gold)" text-anchor="middle">5. Succinyl-CoA synthetase, +GTP/ATP</text>
+            <text x="150" y="392" fill="var(--teal-deep)" text-anchor="middle">6. Succinate DH, +FADH2</text>
+            <text x="46" y="270" fill="var(--ink-soft)" text-anchor="middle">7. Fumarase</text>
+            <text x="46" y="165" fill="var(--teal-deep)" text-anchor="middle">8. Malate DH, +NADH</text>
+          </g>
+        </svg>
+        <div class="net-summary"><strong>Net per turn (one acetyl-CoA):</strong> 3 NADH, 1 FADH2, 1 GTP/ATP, 2 CO2. Since glycolysis yields 2 pyruvate per glucose, the cycle turns twice per glucose — doubling all of the above, on top of the 2 NADH already generated by the pyruvate dehydrogenase step.</div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Electron transport chain &amp; oxidative phosphorylation</h3>
+        <p class="diagram-caption">The payoff for all that NADH and FADH2: electrons flow downhill through four protein complexes in the inner mitochondrial membrane, pumping protons that ATP synthase then uses to make ATP.</p>
+        <svg viewBox="0 0 760 260" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="90" width="740" height="16" fill="var(--paper-raised)" stroke="var(--line)" stroke-width="1"/>
+          <text x="20" y="86" font-family="IBM Plex Sans" font-size="9" fill="var(--ink-soft)">Inner mitochondrial membrane</text>
+          <text x="20" y="128" font-family="IBM Plex Sans" font-size="9" fill="var(--ink-soft)">Matrix (inside)</text>
+          <text x="20" y="70" font-family="IBM Plex Sans" font-size="9" fill="var(--ink-soft)">Intermembrane space</text>
+          <defs>
+            <marker id="arrowE" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 z" fill="var(--gold)"/>
+            </marker>
+          </defs>
+          <!-- proton pumps -->
+          <g font-family="IBM Plex Sans" font-size="10" text-anchor="middle" fill="var(--ink)">
+            <rect x="60" y="70" width="70" height="56" rx="4" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="95" y="102">Complex I</text>
+            <rect x="220" y="70" width="70" height="56" rx="4" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="255" y="98">Complex</text><text x="255" y="110">II</text>
+            <rect x="380" y="70" width="70" height="56" rx="4" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="415" y="98">Complex</text><text x="415" y="110">III</text>
+            <rect x="540" y="70" width="70" height="56" rx="4" fill="var(--paper)" stroke="var(--teal)" stroke-width="1.8"/><text x="575" y="98">Complex</text><text x="575" y="110">IV</text>
+            <rect x="660" y="60" width="80" height="76" rx="6" fill="var(--paper)" stroke="var(--gold)" stroke-width="2"/><text x="700" y="94">ATP</text><text x="700" y="107">synthase</text>
+          </g>
+          <!-- electron carriers feeding in -->
+          <g font-family="IBM Plex Sans" font-size="9.5">
+            <text x="60" y="58" fill="var(--teal-deep)">NADH →</text>
+            <text x="220" y="58" fill="var(--teal-deep)">FADH2 →</text>
+          </g>
+          <!-- Q and cyt c shuttles -->
+          <circle cx="200" cy="95" r="9" fill="var(--paper-raised)" stroke="var(--ink-soft)" stroke-width="1"/><text x="200" y="98" font-family="IBM Plex Sans" font-size="7.5" text-anchor="middle">Q</text>
+          <circle cx="360" cy="80" r="9" fill="var(--paper-raised)" stroke="var(--ink-soft)" stroke-width="1"/><text x="360" y="83" font-family="IBM Plex Sans" font-size="7.5" text-anchor="middle">cyt c</text>
+          <!-- proton arrows pumped up -->
+          <g stroke="var(--gold)" stroke-width="1.6" marker-end="url(#arrowE)">
+            <line x1="80" y1="68" x2="80" y2="40"/>
+            <line x1="405" y1="68" x2="405" y2="40"/>
+            <line x1="565" y1="68" x2="565" y2="40"/>
+          </g>
+          <g font-family="IBM Plex Sans" font-size="8.5" fill="var(--gold)" text-anchor="middle">
+            <text x="80" y="34">H+</text>
+            <text x="405" y="34">H+</text>
+            <text x="565" y="34">H+</text>
+          </g>
+          <!-- proton flow back through ATP synthase -->
+          <path d="M 700 55 L 700 30 L 700 140 L 700 165" fill="none" stroke="var(--gold)" stroke-width="1.6" marker-end="url(#arrowE)"/>
+          <text x="720" y="150" font-family="IBM Plex Sans" font-size="8.5" fill="var(--gold)">H+ flows back, driving ATP synthesis</text>
+          <!-- final acceptor -->
+          <text x="610" y="150" font-family="IBM Plex Sans" font-size="9.5" fill="var(--rust)" text-anchor="middle">½ O2 + 2H+ → H2O</text>
+          <line x1="590" y1="126" x2="595" y2="140" stroke="var(--rust)" stroke-width="1.3" marker-end="url(#arrowE)"/>
+        </svg>
+        <div class="net-summary"><strong>The core idea:</strong> Complexes I, III, and IV use the energy of electrons passing from NADH (or, via Complex II, from FADH2) down to oxygen to pump H+ into the intermembrane space, building an electrochemical gradient. ATP synthase lets those protons flow back down that gradient, using the energy to phosphorylate ADP into ATP — a process called chemiosmosis. Oxygen is the final electron acceptor, which is why this whole stage requires it: without O2 to accept electrons, the chain backs up and NADH/FADH2 can no longer be reoxidized.</div>
+      </div>
+    </section>
+
+    <!-- UNIT 9: TECHNIQUES -->
+    <section class="unit" id="u9">
+      <div class="unit-head">
+        <svg class="unit-icon" viewBox="0 0 64 64" fill="none">
+          <rect x="24" y="12" width="8" height="18" stroke="var(--teal)" stroke-width="1.8"/>
+          <path d="M22 30 L16 48 Q 28 54, 40 48 L34 30" stroke="var(--teal)" stroke-width="1.8" fill="none"/>
+          <line x1="18" y1="44" x2="38" y2="44" stroke="var(--gold)" stroke-width="1.6"/>
+        </svg>
+        <div class="unit-title">
+          <h2>Molecular Techniques Relevant to Biomolecules</h2>
+          <p>The instrumentation and methods that make everything above measurable — often integrated with, or a bridge into, a companion lab or recombinant DNA course.</p>
+        </div>
+      </div>
+      <div class="topics">
+        <div class="topic"><h3>Spectrophotometry</h3><p>UV-Vis absorbance at 260 nm quantifies nucleic acids, and at 280 nm quantifies protein — the 260/280 ratio is a standard purity check. The Beer-Lambert law (A = εcl) underlies these measurements, linking absorbance directly to a sample's concentration.</p></div>
+        <div class="topic"><h3>Centrifugation</h3><p>Differential and density-gradient centrifugation separate cellular components or macromolecules by size, shape, and density. Relative centrifugal force (RCF, in ×g) rather than raw RPM is the value that actually determines separation, since it also depends on the rotor's radius.</p></div>
+        <div class="topic"><h3>Electrophoresis</h3><p>Agarose gels separate nucleic acids by size; polyacrylamide (PAGE) gels, often with SDS, separate proteins — both rely on migration rate through a matrix under an electric field. Adding SDS to a protein sample coats it with a uniform negative charge, so that migration through the PAGE gel reflects size alone rather than the protein's native charge or shape.</p></div>
+        <div class="topic"><h3>Recombinant DNA basics</h3><p>Restriction enzymes, ligation, and cloning vectors are the foundational toolkit — covered here at a conceptual level if this course doesn't run a dedicated molecular biology lab alongside it. Restriction enzymes recognize specific palindromic sequences and often leave 'sticky ends' — short single-stranded overhangs — that make ligating a gene of interest into a vector far more efficient.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      Nine units, sequenced from physical chemistry fundamentals to the metabolic pathways that open into cell biology. Use the left index to jump between units, or scroll straight through.
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('#rail-list a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  function setActive(){
+    let idx = 0;
+    const y = window.scrollY + 120;
+    sections.forEach((s,i)=>{ if(s && s.offsetTop <= y) idx = i; });
+    links.forEach((a,i)=> a.classList.toggle('active', i===idx));
+  }
+  window.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+</script>
+
+</body>
+</html>
